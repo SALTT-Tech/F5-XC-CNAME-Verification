@@ -1,0 +1,5 @@
+# F5-CNAME-Verification Requirements
+requests
+rich
+pydig
+python-dotenv

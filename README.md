@@ -17,6 +17,7 @@ This Python script verifies ACME challenge CNAME records by comparing expected D
 XC_API_TOKEN="your_api_token"
 XC_API_URL="https://<region>.console.ves.volterra.io/api"
 ```
+You can create an API Token via the Service Credentials section of F5 XC. Refer to the following for instructions https://docs.cloud.f5.com/docs-v2/administration/how-tos/user-mgmt/Credentials
 
 ## Installation
 

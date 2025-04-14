@@ -20,17 +20,17 @@ XC_API_URL="https://<region>.console.ves.volterra.io/api"
 
 ## Installation
 
-1. Clone the repository.
-2. Open the repository directory and initialise a Python virtual environment (optional)
+1. Initialise a Python virtual environment (optional but reccomended)
 ```bash
-cd ./F5-CNAME-Verification
 python3 -m venv ./
 source ./bin/activate
 ```
-3. Install dependencies:
- ```bash
- pip install -r requirements.txt
- ```
+2. Clone the repository.
+3. Open the repository directory & install the dependencies:
+```bash
+cd ./F5-XC-CNAME-Verification
+pip install -r requirements.txt
+```
 4.	Create a .env file with your credentials.
 ```
 XC_API_TOKEN="your_api_token"

@@ -26,6 +26,9 @@ python3 -m venv ./
 source ./bin/activate
 ```
 2. Clone the repository.
+```bash
+git clone https://github.com/SALTT-Tech/F5-XC-CNAME-Verification.git
+```
 3. Open the repository directory & install the dependencies:
 ```bash
 cd ./F5-XC-CNAME-Verification

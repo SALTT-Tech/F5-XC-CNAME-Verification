@@ -20,7 +20,7 @@ XC_API_URL="https://<region>.console.ves.volterra.io/api"
 
 ## Installation
 
-1. Initialise a Python virtual environment (optional but reccomended)
+1. Initialise a Python virtual environment (optional but recommended)
 ```bash
 python3 -m venv ./
 source ./bin/activate

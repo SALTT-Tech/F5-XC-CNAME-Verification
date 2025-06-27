@@ -26,7 +26,7 @@ def get_namespaces(api_token, api_url_base):
     return [item['name'] for item in data.get('items', [])]
 
 
-def print_acme_cnames(api_token, namespace, api_url_base):
+def print_acme_cnames(api_token, namespace, api_url_base, args):
     # Text Colour
     GREEN = '\033[92m'
     RED = '\033[91m'
@@ -86,18 +86,20 @@ def print_acme_cnames(api_token, namespace, api_url_base):
                     status = "Not Found"
                     status_colour = BLUE
                     resolved = ""
+                    print(status_colour, "{:<40} {:<60} {:<60} {:<60} {:<10}".format(lb_name, name, expected, resolved, status), RESET)
                 elif resolved == expected:
                     status = "Match"
                     status_colour = GREEN
+                    if not args.failed:
+                        print(status_colour, "{:<40} {:<60} {:<60} {:<60} {:<10}".format(lb_name, name, expected, resolved, status), RESET)        
                 else:
                     status = "Mismatch"
                     status_colour = RED
-
-                print(status_colour, "{:<40} {:<60} {:<60} {:<60} {:<10}".format(lb_name, name, expected, resolved, status), RESET)
+                    print(status_colour, "{:<40} {:<60} {:<60} {:<60} {:<10}".format(lb_name, name, expected, resolved, status), RESET)
 
     return cname_records
 
-def table_acme_cnames(api_token, namespace, api_url_base):
+def table_acme_cnames(api_token, namespace, api_url_base, args):
     from rich.console import Console
     from rich.table import Table
     from rich import box
@@ -181,10 +183,17 @@ def table_acme_cnames(api_token, namespace, api_url_base):
 def main():
     parser = argparse.ArgumentParser(description="Check F5 XC ACME CNAME records.")
     parser.add_argument(
+        '-M',
         '--mode',
         choices=['print', 'table'],
-        default='table',
-        help='Choose output format: "table" (default) or "print".'
+        default='print',
+        help='Choose output format: "table" or "print" (default).'
+    )
+    parser.add_argument(
+        '-F',
+        '--failed',
+        action='store_true',
+        help='Output only failed checks (only available for print output).'
     )
     args = parser.parse_args()
 
@@ -192,9 +201,9 @@ def main():
     for NAMESPACE in namespaces:
 
         if args.mode == 'print':
-            print_acme_cnames(API_TOKEN, NAMESPACE, API_URL)
+            print_acme_cnames(API_TOKEN, NAMESPACE, API_URL, args)
         else:
-            table_acme_cnames(API_TOKEN, NAMESPACE, API_URL)
+            table_acme_cnames(API_TOKEN, NAMESPACE, API_URL, args)
 
 if __name__ == "__main__":
     main()
